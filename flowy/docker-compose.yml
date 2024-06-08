@@ -12,6 +12,7 @@ services:
       - '3001:3001'
     environment:
       - NODE_ENV=production
+      - PORT=3001
     networks:
       - central-net
 
