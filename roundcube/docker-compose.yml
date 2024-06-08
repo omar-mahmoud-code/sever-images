@@ -6,10 +6,10 @@ services:
     container_name: roundcube
     restart: always
     environment:
-      ROUNDCUBEMAIL_DEFAULT_HOST: central-mariadb
+      ROUNDCUBEMAIL_DEFAULT_HOST: mail.arqaamtech.com
       ROUNDCUBEMAIL_SMTP_SERVER: smtp.arqaamtech.com
       ROUNDCUBEMAIL_DES_KEY: some_secret_key
-      ROUNDCUBEMAIL_DB_TYPE: mysqli
+      ROUNDCUBEMAIL_DB_TYPE: mysql
       ROUNDCUBEMAIL_DB_HOST: central-mariadb
       ROUNDCUBEMAIL_DB_USER: admin
       ROUNDCUBEMAIL_DB_PASSWORD: Admin@2014
