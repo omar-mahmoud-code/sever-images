@@ -42,13 +42,14 @@ RUN chown -R www-data:www-data /var/www/work
 RUN chmod -R 755 /var/www/work
 
 # Set working directory
-WORKDIR /var/www/work
+WORKDIR /var/www
 
-# Run Composer scripts and dump autoloader
-RUN composer install --no-dev --optimize-autoloader
+# Copy entrypoint script
+COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
 
 # Expose port 80
 EXPOSE 80
 
-# Start Supervisor with the configuration file
-CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
+# Set entrypoint
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
