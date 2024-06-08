@@ -35,12 +35,12 @@ RUN touch /var/log/php-fpm/php-fpm.log /var/log/php-fpm/php-fpm_err.log
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-RUN composer install
+
 
 # Set permissions
 RUN chown -R www-data:www-data /var/www/work
 RUN chmod -R 755 /var/www/work
-
+RUN composer install
 # Expose port 80
 EXPOSE 80
 
