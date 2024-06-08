@@ -7,13 +7,13 @@ services:
     restart: always
     environment:
       ROUNDCUBEMAIL_DEFAULT_HOST: central-mariadb
-      ROUNDCUBEMAIL_SMTP_SERVER: smtp.example.com
+      ROUNDCUBEMAIL_SMTP_SERVER: smtp.arqaamtech.com
       ROUNDCUBEMAIL_DES_KEY: some_secret_key
-      ROUNDCUBEMAIL_DB_TYPE: mysql
+      ROUNDCUBEMAIL_DB_TYPE: mysqli
       ROUNDCUBEMAIL_DB_HOST: central-mariadb
-      ROUNDCUBEMAIL_DB_USER: central_user
-      ROUNDCUBEMAIL_DB_PASSWORD: your_password
-      ROUNDCUBEMAIL_DB_NAME: central_db
+      ROUNDCUBEMAIL_DB_USER: admin
+      ROUNDCUBEMAIL_DB_PASSWORD: Admin@2014
+      ROUNDCUBEMAIL_DB_NAME: emails
     ports:
       - "80:80"
     networks:

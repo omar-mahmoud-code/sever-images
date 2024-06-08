@@ -7,7 +7,7 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: Admin@2014
-      MYSQL_DATABASE: central_db
+      MYSQL_DATABASE: emails
       MYSQL_USER: admin
       MYSQL_PASSWORD: Admin@2014
     volumes:
