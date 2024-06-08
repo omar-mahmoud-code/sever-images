@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  flowy:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    working_dir: /app
+    volumes:
+      - /root/flowy:/app
+    ports:
+      - '3001:3001'
+    environment:
+      - NODE_ENV=production
+    networks:
+      - central-net
+
+networks:
+  central-net:
+    external: true
