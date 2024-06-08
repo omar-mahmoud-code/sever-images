@@ -4,15 +4,18 @@ services:
   app:
     image: php:7.3-fpm
     container_name: php_app
-    working_dir: /var/www
+    working_dir: /var/www/worketic
     volumes:
-      - ./worketic:/root/www/worketic
-      - ./wordpress:/root/www/wordpress
+      - ./worketic:/var/www/worketic
     ports:
       - "9000:9000"
     networks:
       - central-net
-
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
 volumes:
   db_data:
 
