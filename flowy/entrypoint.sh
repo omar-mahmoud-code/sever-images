@@ -12,7 +12,7 @@ ls -la /app
 yarn install
 
 # Build the Next.js application
-yarn build
+#yarn build
 
 # Run the Next.js production server
-yarn start
+3yarn start
