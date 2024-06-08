@@ -5,7 +5,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    working_dir: /app
     volumes:
       - /root/flowy:/app
     ports:
