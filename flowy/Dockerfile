@@ -7,9 +7,8 @@ WORKDIR /app
 
 
 # Copy entry script
-COPY entrypoint.sh /app/entrypoint.sh
-RUN chmod +x /app/entrypoint.sh
-
+COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
 
 # List the contents of /app to verify
 RUN ls -la /app
@@ -18,6 +17,5 @@ RUN ls -la /app
 # Expose the port the app runs on
 EXPOSE 3001
 
-# Set the entrypoint
-ENTRYPOINT ["sh", "/app/entrypoint.sh"]
-
+# Set entrypoint
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
