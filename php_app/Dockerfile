@@ -11,6 +11,9 @@ RUN apt-get update && apt-get install -y \
     nginx \
     supervisor
 
+# Create necessary directories
+RUN mkdir -p /var/log/nginx /var/log/php-fpm
+
 # Configure Nginx
 COPY nginx/default.conf /etc/nginx/conf.d/default.conf
 
