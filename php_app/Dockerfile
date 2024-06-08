@@ -36,11 +36,6 @@ RUN touch /var/log/php-fpm/php-fpm.log /var/log/php-fpm/php-fpm_err.log
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 
-
-# Set permissions
-RUN chown -R www-data:www-data /var/www/work
-RUN chmod -R 755 /var/www/work
-
 # Set working directory
 WORKDIR /var/www
 
