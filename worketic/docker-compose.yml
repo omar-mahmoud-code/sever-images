@@ -6,7 +6,7 @@ services:
     container_name: php_app
     working_dir: /var/www/worketic
     volumes:
-      - ./worketic:/var/www/worketic
+      - /root/www/worketic:/var/www/worketic
     ports:
       - "9000:9000"
     networks:
