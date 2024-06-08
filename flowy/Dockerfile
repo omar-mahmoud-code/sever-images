@@ -7,8 +7,8 @@ WORKDIR /app
 
 
 # Copy entry script
-COPY entrypoint.sh /usr/local/bin/entrypoint.sh
-RUN chmod +x /usr/local/bin/entrypoint.sh
+COPY entrypoint.sh /app/entrypoint.sh
+RUN chmod +x /app/entrypoint.sh
 
 # List the contents of /app to verify
 RUN ls -la /app
@@ -18,4 +18,4 @@ RUN ls -la /app
 EXPOSE 3001
 
 # Set entrypoint
-ENTRYPOINT ["/bin/sh", "/usr/local/bin/entrypoint.sh"]
+ENTRYPOINT ["/bin/sh", "/app/entrypoint.sh"]
