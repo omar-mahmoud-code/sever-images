@@ -14,6 +14,8 @@ services:
       - db_data:/var/lib/mysql
     networks:
       - central-net
+    ports:
+      - "3306:3306"  # Expose port 3306 to the public
 
 networks:
   central-net:
