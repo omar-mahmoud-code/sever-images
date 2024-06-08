@@ -15,4 +15,4 @@ yarn install
 #yarn build
 
 # Run the Next.js production server
-3yarn start
+#yarn start
