@@ -14,7 +14,11 @@ services:
       - "27017:27017"
     networks:
       - central-net
-      
+
 volumes:
   mongo-data:
     driver: local
+
+networks:
+  central-net:
+    external: true
