@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  db:
+    image: mariadb:latest
+    container_name: central-mariadb
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: Admin@2014
+      MYSQL_DATABASE: central_db
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: Admin@2014
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - central-net
+
+networks:
+  central-net:
+    external: true
+
+volumes:
+  db_data:
