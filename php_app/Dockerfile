@@ -20,6 +20,10 @@ COPY nginx/default.conf /etc/nginx/conf.d/default.conf
 # Copy Supervisor configuration
 COPY nginx/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
+# Create log files
+RUN touch /var/log/nginx/nginx.log /var/log/nginx/nginx_err.log
+RUN touch /var/log/php-fpm/php-fpm.log /var/log/php-fpm/php-fpm_err.log
+
 # Expose port 80
 EXPOSE 80
 
