@@ -12,6 +12,9 @@ services:
       - /root/www:/var/www/
     networks:
       - central-net
-      
+networks:
+  central-net:
+    external: true
+       
 volumes:
   db_data:
