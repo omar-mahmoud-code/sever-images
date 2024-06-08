@@ -18,4 +18,4 @@ RUN ls -la /app
 EXPOSE 3001
 
 # Set entrypoint
-ENTRYPOINT ["/bin/sh", "/app/entrypoint.sh"]
+ENTRYPOINT ["/bin/sh", "/usr/local/bin/entrypoint.sh"]
