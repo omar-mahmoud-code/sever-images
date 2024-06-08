@@ -40,7 +40,13 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 # Set permissions
 RUN chown -R www-data:www-data /var/www/work
 RUN chmod -R 755 /var/www/work
-RUN composer install
+
+# Set working directory
+WORKDIR /var/www/work
+
+# Run Composer scripts and dump autoloader
+RUN composer install --no-dev --optimize-autoloader
+
 # Expose port 80
 EXPOSE 80
 
