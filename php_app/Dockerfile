@@ -23,4 +23,5 @@ COPY nginx/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 # Expose port 80
 EXPOSE 80
 
-CMD ["/usr/bin/supervisord"]
+# Start Supervisor with the configuration file
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
