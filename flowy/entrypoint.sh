@@ -1,5 +1,13 @@
 #!/bin/bash
 
+
+# cd /app
+cd /app
+
+
+# ls -la /app
+ls -la /app
+
 # Install dependencies
 yarn install
 
