@@ -7,10 +7,11 @@ services:
       dockerfile: Dockerfile
     volumes:
       - /root/flowy:/app
+      #- /Users/omar/Desktop/dev/Flowy:/app
     ports:
       - '3001:3001'
     environment:
-      - NODE_ENV=production
+      #- NODE_ENV=development
       - PORT=3001
     networks:
       - central-net
