@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  php_app_8_1:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: php_app_8_1
+    ports:
+      - "8001:80"
+    volumes:
+      - /root/www:/var/www/
+    networks:
+      - central-net
+networks:
+  central-net:
+    external: true
+       
+volumes:
+  db_data:
