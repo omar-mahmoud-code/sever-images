@@ -28,7 +28,7 @@ RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
 RUN mkdir -p /var/log/nginx /var/log/php-fpm
 
 # Configure Nginx
-COPY nginx/default.conf /etc/nginx/conf.d/default.conf
+COPY nginx/default.conf /etc/nginx/conf.d/default
 
 # Copy Supervisor configuration
 COPY nginx/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
