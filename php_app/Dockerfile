@@ -16,7 +16,7 @@ RUN apt-get update && apt-get install -y \
     libonig-dev
 
 # Install PHP extensions
-RUN docker-php-ext-install pdo pdo_mysql mbstring tokenizer xml ctype json bcmath zip gd
+RUN docker-php-ext-install pdo pdo_mysql mbstring tokenizer xml ctype json bcmath zip gd mysqli
 
 
 # Create necessary directories
@@ -31,6 +31,9 @@ COPY nginx/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 # Create log files
 RUN touch /var/log/nginx/nginx.log /var/log/nginx/nginx_err.log
 RUN touch /var/log/php-fpm/php-fpm.log /var/log/php-fpm/php-fpm_err.log
+
+RUN chmod 777 /var/log/nginx/nginx.log /var/log/nginx/nginx_err.log
+RUN chmod 777 /var/log/php-fpm/php-fpm.log /var/log/php-fpm/php-fpm_err.log
 
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
