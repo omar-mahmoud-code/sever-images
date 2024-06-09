@@ -11,6 +11,10 @@ if [ ! -d "$LOCAL_SITES_AVAILABLE_DIR" ]; then
     exit 1
 fi
 
+echo "Deleting all contents inside $NGINX_SITES_AVAILABLE_DIR and $NGINX_SITES_ENABLED_DIR..."
+sudo rm -rf "$NGINX_SITES_AVAILABLE_DIR"/*
+sudo rm -rf "$NGINX_SITES_ENABLED_DIR"/*
+
 # Copy the files from the local directory to the Nginx sites-available directory
 echo "Copying files from $LOCAL_SITES_AVAILABLE_DIR to $NGINX_SITES_AVAILABLE_DIR..."
 sudo cp "$LOCAL_SITES_AVAILABLE_DIR"/* "$NGINX_SITES_AVAILABLE_DIR"/
