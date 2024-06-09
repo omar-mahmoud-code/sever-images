@@ -13,10 +13,15 @@ RUN apt-get update && apt-get install -y \
     nginx \
     supervisor \
     libxml2-dev \
+    libcurl4-openssl-dev \
+    pkg-config \
     libonig-dev
 
 # Install PHP extensions
-RUN docker-php-ext-install pdo pdo_mysql mbstring tokenizer xml ctype json bcmath zip gd mysqli
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install -j$(nproc) gd \
+    && docker-php-ext-install pdo pdo_mysql mbstring exif xml curl zip mysqli
+
 
 
 # Create necessary directories
