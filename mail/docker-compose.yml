@@ -1,136 +1,78 @@
-# WARNING: this file is being deprecated over the new setup utility, found at https://setup.mailu.io
-
-version: '2'
+version: '3'
 
 services:
-
-  front:
-    image: mailu/nginx:$VERSION
-    restart: always
-    env_file: .env
-    logging:
-      driver: journald
-      options:
-        tag: mailu-front
-    ports:
-    - "$BIND_ADDRESS4:8088:80"
-    - "$BIND_ADDRESS4:443:443"
-    - "$BIND_ADDRESS4:110:110"
-    - "$BIND_ADDRESS4:143:143"
-    - "$BIND_ADDRESS4:993:993"
-    - "$BIND_ADDRESS4:995:995"
-    - "$BIND_ADDRESS4:25:25"
-    - "$BIND_ADDRESS4:465:465"
-    - "$BIND_ADDRESS4:587:587"
-    - "$BIND_ADDRESS6:80:80"
-    - "$BIND_ADDRESS6:443:443"
-    - "$BIND_ADDRESS6:110:110"
-    - "$BIND_ADDRESS6:143:143"
-    - "$BIND_ADDRESS6:993:993"
-    - "$BIND_ADDRESS6:995:995"
-    - "$BIND_ADDRESS6:25:25"
-    - "$BIND_ADDRESS6:465:465"
-    - "$BIND_ADDRESS6:587:587"
-    volumes:
-      - "$ROOT/certs:/certs"
-      - "$ROOT/overrides/nginx:/overrides:ro"
-
   redis:
     image: redis:alpine
     restart: always
+    command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
     volumes:
-      - "$ROOT/redis:/data"
+      - redis:/data
+      - ./redis.conf:/usr/local/etc/redis/redis.conf
+    deploy:
+      resources:
+        limits:
+          cpus: "0.25"
+          memory: "128M"
 
-  imap:
-    image: mailu/dovecot:$VERSION
+  front:
+    image: mailu/nginx:1.7
     restart: always
     env_file: .env
-    logging:
-      driver: journald
-      options:
-        tag: mailu-imap
+    ports:
+      - "8088:80"
+      - "443:443"
+      - "25:25"
+      - "465:465"
+      - "587:587"
+      - "110:110"
+      - "995:995"
+      - "143:143"
+      - "993:993"
+      - "4190:4190"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: "256M"
     volumes:
-      - "$ROOT/mail:/mail"
-      - "$ROOT/overrides/dovecot:/overrides:ro"
-    depends_on:
-      - front
-
-  smtp:
-    image: mailu/postfix:$VERSION
-    restart: always
-    env_file: .env
-    logging:
-      driver: journald
-      options:
-        tag: mailu-smtp
-    volumes:
-      - "$ROOT/mailqueue:/queue"
-      - "$ROOT/overrides/postfix:/overrides:ro"
-    depends_on:
-      - front
-
-  antispam:
-    image: mailu/rspamd:$VERSION
-    restart: always
-    env_file: .env
-    logging:
-      driver: journald
-      options:
-        tag: mailu-antispam
-    volumes:
-      - "$ROOT/filter:/var/lib/rspamd"
-      - "$ROOT/dkim:/dkim:ro"
-      - "$ROOT/overrides/rspamd:/etc/rspamd/override.d:ro"
-    depends_on:
-      - front
-
-  antivirus:
-    image: mailu/$ANTIVIRUS:$VERSION
-    restart: always
-    env_file: .env
-    volumes:
-      - "$ROOT/filter:/data"
-
-  webdav:
-    image: mailu/$WEBDAV:$VERSION
-    restart: always
-    env_file: .env
-    volumes:
-      - "$ROOT/dav:/data"
+      - mailu:/data
 
   admin:
-    image: mailu/admin:$VERSION
+    image: mailu/admin:1.7
     restart: always
     env_file: .env
-    logging:
-      driver: journald
-      options:
-        tag: mailu-admin
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: "256M"
     volumes:
-      - "$ROOT/data:/data"
-      - "$ROOT/dkim:/dkim"
-    depends_on:
-      - redis
+      - mailu:/data
 
-  webmail:
-    image: "mailu/$WEBMAIL:$VERSION"
+  imap:
+    image: mailu/dovecot:1.7
     restart: always
     env_file: .env
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: "256M"
     volumes:
-      - "$ROOT/webmail:/data"
-      - "$ROOT/overrides/$WEBMAIL:/overrides:ro"
-    depends_on:
-      - imap
+      - mailu:/data
 
-  fetchmail:
-    image: mailu/fetchmail:$VERSION
+  smtp:
+    image: mailu/postfix:1.7
     restart: always
     env_file: .env
-    
-networks:
-  default:
-    driver: bridge
-    ipam:
-      driver: default
-      config:
-        - subnet: $SUBNET
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: "256M"
+    volumes:
+      - mailu:/data
+
+volumes:
+  redis:
+  mailu:
