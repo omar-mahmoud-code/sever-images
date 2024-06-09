@@ -15,7 +15,7 @@ services:
           memory: "128M"
 
   front:
-    image: mailu/nginx:1.7
+    image: mailu/nginx:master
     restart: always
     env_file: .env
     ports:
@@ -38,7 +38,7 @@ services:
       - mailu:/data
 
   admin:
-    image: mailu/admin:1.7
+    image: mailu/admin:master
     restart: always
     env_file: .env
     deploy:
@@ -50,7 +50,7 @@ services:
       - mailu:/data
 
   imap:
-    image: mailu/dovecot:1.7
+    image: mailu/dovecot:master
     restart: always
     env_file: .env
     deploy:
@@ -62,7 +62,7 @@ services:
       - mailu:/data
 
   smtp:
-    image: mailu/postfix:1.7
+    image: mailu/postfix:master
     restart: always
     env_file: .env
     deploy:
