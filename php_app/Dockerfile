@@ -43,6 +43,8 @@ WORKDIR /var/www
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
 
+COPY php/custom-php.ini /usr/local/etc/php/conf.d/custom-php.ini
+
 # Expose port 80
 EXPOSE 80
 
