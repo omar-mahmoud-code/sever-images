@@ -11,7 +11,7 @@ chown -R www-data:www-data /var/www/
 chmod -R 755 /var/www/
 
 # Start Supervisor
-exec supervisord -c /etc/supervisor/conf.d/supervisord.conf
+exec supervisord -c /etc/supervisor/conf.d/supervisord.conf &
 
-tail -f /var/log/nginx/nginx.log /var/log/nginx/nginx_err.log /var/log/php-fpm/php-fpm.log /var/log/php-fpm/php-fpm_err.log
-
+# Tail the log files
+tail -f /var/log/nginx/nginx_err.log /var/log/php-fpm/php-fpm.log /var/log/php-fpm/php-fpm_err.log

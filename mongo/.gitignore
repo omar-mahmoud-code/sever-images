@@ -1,0 +1,29 @@
+# Environment files with passwords
+.env
+
+# MongoDB data volumes (local development)
+data/
+backups/
+*.tar.gz
+
+# Logs
+*.log
+logs/
+
+# OS files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+*~
+
+# MongoDB files if running locally
+mongod.lock
+WiredTiger*
+journal/
+diagnostic.data/
